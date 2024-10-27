@@ -14,8 +14,10 @@ btn.addEventListener("click", () => {
             result.innerHTML = `
             <div class="word">
                 <h3>${inpword}</h3>
-                <img src="volume-high-solid.svg" alt="" id="volume-icon">
-            </div>
+                <button onclick="playSound()">
+                <i class="fa-solid fa-volume-high"></i>
+                </button>
+                </div>
 
             <div class="details">
                 <p>${data[0].meanings[0].partOfSpeech}</p>
@@ -29,11 +31,17 @@ btn.addEventListener("click", () => {
             ${data[0].meanings[0].definitions[0].example || ""}
             </p>`;
 
-            sound.setAttribute('src',`https:${data[0].phonetics[0].audio}`)
+            sound.setAttribute("src",`${data[0].phonetics[1].audio}`);
             console.log(sound);
             
 
-        });
+        })
+        .catch(()=>{
+            result.innerHTML=`<h3 class="error">Couldn't find the word</h3>`
+        })
 
 
-})
+});
+function playSound(){
+    sound.play();
+}
